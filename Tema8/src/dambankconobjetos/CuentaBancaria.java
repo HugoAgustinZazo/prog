@@ -100,14 +100,16 @@ public class CuentaBancaria {
 		System.out.println("***************************");
 		System.out.println("LISTADO DE MOVIMIENTOS");
 		System.out.println("***************************");
-		for(Movimientos mov:mv) {
-			if(mov.getIbanOrigen().equalsIgnoreCase(iban)) {
-				mv.toString();
-			}
+		for(Movimientos mov:cbb.mv) {
+			mov.toString();
 		}
-		System.out.println();
+		}
 	}
 	}
+	public static void movimientos() {
+		for(Movimientos mov:mv) {
+			mov.toString();
+		}
 	}
 	public static void mostrarCuentaBancaria(String iban) {
 		for(CuentaBancaria cbb:cb) {
@@ -150,7 +152,8 @@ public class CuentaBancaria {
 	String conc=teclado.nextLine();
 	for(CuentaBancaria cbb:cb) {
 	if(cbb.getIban().equalsIgnoreCase(iban1)) {	
-	for(Movimientos m:mv) {
+		cbb.mv.add(new Movimientos(iban1,getFechaActual(),cant,conc));
+		for(Movimientos m:cbb.mv) {
 	if (m.getCantidad()<=0) {
 		System.out.println("ERROR, NO SE PUEDE INGRESAR UNA CANTIDAD INFERIOR A 1");
 		
@@ -158,8 +161,7 @@ public class CuentaBancaria {
 	if (m.getCantidad() > 3000) {
 		System.out.println("¡¡¡AVISA A HACIENDA!!!");
 	}
-	mv.add(new Movimientos(iban1,getFechaActual(),cant,conc));
-	cbb.saldo = cbb.saldo - m.getCantidad();
+	cbb.saldo = cbb.saldo + m.getCantidad();
 	System.out.println("Ingreso hecho");
 	
 	}
@@ -176,7 +178,9 @@ public class CuentaBancaria {
 		String conc=teclado.nextLine();
 		for(CuentaBancaria cbb:cb) {
 			if(cbb.getIban().equalsIgnoreCase(iban)) {	
-			for(Movimientos m:mv) {
+				cbb.mv.add(new Movimientos(iban,getFechaActual(),cant,conc));
+				
+			for(Movimientos m:cbb.mv) {
 		if (m.getCantidad() <=0) {
 			System.out.println("ERROR, NO SE PUEDE RETIRAR UNA CANTIDAD INFERIOR A 1");
 			
@@ -184,13 +188,11 @@ public class CuentaBancaria {
 			System.out.println("NO PUEDES DEJAR LA CUENTA PELADA");
 			
 		}
-		Movimientos mm = new Movimientos(iban,getFechaActual(),cant,conc);
-		mv.add(mm);
-		retirar(iban,m);
+		
 		if (cbb.saldo < 0) {
 			System.out.println("HAS DEJANDO LA CUENTA EN NEGATIVO");
 		}
-		
+		cbb.saldo = cbb.saldo - m.getCantidad();
 			}
 			}
 		}
