@@ -53,7 +53,7 @@ public class CuentaBancaria {
 	*/
 	static ArrayList <CuentaBancaria> cb = new ArrayList();
 	
-	public void mostrarInfo() {
+	public void mostrarInfotext() {
 		System.out.println("***************************");
 		System.out.println("DATOS DE LA CUENTA BANCARIA");
 		System.out.println("***************************");
@@ -64,31 +64,33 @@ public class CuentaBancaria {
 		System.out.println("***************************");
 	}
 	
-	public void mostrarIban() {
+	public void mostrarIbantext() {
 		System.out.println("###############################");
 		System.out.println("IBAN: " + this.iban);
 		System.out.println("###############################");
 	}
 	
-	public void mostrarTitular() {
+	public void mostrarTitulartext() {
 		System.out.println("####### TITULAR DE LA CUENTA #####");
 		this.titular.mostrarInfoPersona();
 		System.out.println();
 		System.out.println("###############################");
 		
 	}
-	public void mostrarSaldo() {
+	public void mostrarSaldotext() {
 		System.out.println("###############################");
 		System.out.println("Saldo: " + this.saldo);
 		System.out.println("###############################");
 	}
 	
-	public static void mostrarMovimientos(String iban)throws CuentaException{
+	public static void mostrarMovimientos()throws CuentaException{
 	boolean estado = false;
 		while(!estado) {
 		try {	
+			System.out.println("Dime el iban de la cuenta de la que quieras ver los movimientos");
+			String iban5 = teclado.next();
 	for(CuentaBancaria cbb:cb) {	
-		if(cbb.getIban().equalsIgnoreCase(iban)) {
+		if(cbb.getIban().equalsIgnoreCase(iban5)) {
 		System.out.println("***************************");
 		System.out.println("LISTADO DE MOVIMIENTOS");
 		System.out.println("***************************");
@@ -107,13 +109,15 @@ public class CuentaBancaria {
 		}
 	}
 
-	public static void mostrarCuentaBancaria(String iban)throws CuentaException {
+	public static void mostrarCuentaBancaria()throws CuentaException {
 		boolean estado = false;
 		while(!estado) {
 		try {	
+		System.out.println("Dime el iban de la cuenta que quieras ver");
+		String ibann=teclado.next();
 		for(CuentaBancaria cbb:cb) {
-			if(cbb.getIban().equalsIgnoreCase(iban)) {
-				cbb.mostrarInfo();
+			if(cbb.getIban().equalsIgnoreCase(ibann)) {
+				cbb.mostrarInfotext();
 			estado=true;
 			}else 
 				throw new CuentaException("Iban no encontrado");
@@ -123,13 +127,16 @@ public class CuentaBancaria {
 		}
 	}
 	}
-	public static void mostrarIban(String iban)throws CuentaException {
+	public static void mostrarIban()throws CuentaException {
 		boolean estado = false;
 		while(!estado) {
 		try {	
+		System.out.println("Dime el iban de la cuenta que quieras ver");
+		String ibann2=teclado.next();
+			
 		for(CuentaBancaria cbb:cb) {
-			if(cbb.getIban().equalsIgnoreCase(iban)) {
-				cbb.mostrarIban();
+			if(cbb.getIban().equalsIgnoreCase(ibann2)) {
+				cbb.mostrarIbantext();
 			estado=true;
 			}else 
 				throw new CuentaException("Iban no encontrado");
@@ -139,13 +146,15 @@ public class CuentaBancaria {
 		}
 	}
 	}
-	public static void mostrarTitular(String iban)throws CuentaException {
+	public static void mostrarTitular()throws CuentaException {
 		boolean estado = false;
 		while(!estado) {
 		try {	
+		System.out.println("Dime el iban de la cuenta de la que quieras ver el titular");
+		String ibann4=teclado.next();
 		for(CuentaBancaria cbb:cb) {
-			if(cbb.getIban().equalsIgnoreCase(iban)) {
-				cbb.mostrarTitular();
+			if(cbb.getIban().equalsIgnoreCase(ibann4)) {
+				cbb.mostrarTitulartext();
 			estado=true;
 			}else 
 				throw new CuentaException("Iban no encontrado");
@@ -155,13 +164,15 @@ public class CuentaBancaria {
 		}
 	}
 }
-	public static void mostrarSaldo(String iban)throws CuentaException {
+	public static void mostrarSaldo()throws CuentaException {
 		boolean estado = false;
 		while(!estado) {
 		try {	
+		System.out.println("Dime el iban de la cuenta de la que quieras ver el titular");
+		String ibann4=teclado.next();
 		for(CuentaBancaria cbb:cb) {
-			if(cbb.getIban().equalsIgnoreCase(iban)) {
-				cbb.mostrarSaldo();
+			if(cbb.getIban().equalsIgnoreCase(ibann4)) {
+				cbb.mostrarSaldotext();
 			estado=true;
 			}else 
 				throw new CuentaException("Iban no encontrado");
@@ -184,17 +195,13 @@ public class CuentaBancaria {
 	String conc=teclado.nextLine();
 	for(CuentaBancaria cbb:cb) {
 	if(cbb.getIban().equalsIgnoreCase(iban1)) {	
-
 		cbb.mv.add(new Movimientos(iban1,getFechaActual(),cant,conc));
 	if (cant<=0) {
 		throw new CuentaException("No se puede ingresar una cantidad negativa:"+cant);
-
 } 
 	if (cant > 3000) {
 	throw new Avisarhacienda(iban1,cbb.getTitular());
 	}
-
-
 	cbb.saldo = cbb.saldo + cant;
 	cbb.mv.add(new Movimientos(iban1,getFechaActual(),cant,conc));
 	System.out.println("Ingreso hecho");

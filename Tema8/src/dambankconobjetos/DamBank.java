@@ -37,24 +37,16 @@ public class DamBank {
 			switch (opcion) {
 			
 			case 1:
-				System.out.println("Dime el iban de la cuenta que quieras ver");
-				String ibann=teclado.next();
-				CuentaBancaria.mostrarCuentaBancaria(ibann);
+				CuentaBancaria.mostrarCuentaBancaria();
 				break;
 			case 2: 
-				System.out.println("Dime el iban de la cuenta que quieras ver");
-				String ibann2=teclado.next();
-				CuentaBancaria.mostrarIban(ibann2);
+				CuentaBancaria.mostrarIban();
 				break;
 			case 3:
-				System.out.println("Dime el iban de la cuenta de la que quieras ver el titular");
-				String ibann4=teclado.next();
-				CuentaBancaria.mostrarTitular(ibann4);
+				CuentaBancaria.mostrarTitular();
 				break;
 			case 4:
-				System.out.println("Dime el iban de la cuenta de la que quieras ver el saldo");
-				String ibann3=teclado.next();
-				CuentaBancaria.mostrarSaldo(ibann3);
+				CuentaBancaria.mostrarSaldo();
 				break;
 			case 5:
 				CuentaBancaria.ingresarDef();
@@ -63,9 +55,7 @@ public class DamBank {
 				CuentaBancaria.retirarDef();
 				break; 
 			case 7:
-				System.out.println("Dime el iban de la cuenta de la que quieras ver los movimientos");
-				String iban5 = teclado.next();
-				CuentaBancaria.mostrarMovimientos(iban5);
+				CuentaBancaria.mostrarMovimientos();
 				break;
 			case 8: 
 				System.out.println("GRACIAS POR USAR ESTA APLICACIÓN");
