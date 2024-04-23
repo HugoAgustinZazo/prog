@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CuentaBancaria {
@@ -16,10 +17,14 @@ public class CuentaBancaria {
 	
 	
 	static Scanner teclado = new Scanner(System.in);
-	public CuentaBancaria(String iban) {
+	public CuentaBancaria(String iban)throws CuentaException {
+		boolean estado=false;
+		while(!estado) {
+		try {
 		this.iban = iban;
 		System.out.println("Dime su dni");
 		String dni = teclado.next();
+		if(Persona.validarDNI(dni)) {
 		System.out.println("Dime su nombre");
 		String nombre = teclado.next();
 		System.out.println("Dime su apellido");
@@ -29,7 +34,15 @@ public class CuentaBancaria {
 		this.titular = new Persona(dni,nombre,apellido,domicilio);
 		this.saldo = 0;
 		this.mv = new ArrayList<Movimientos>();
-	}
+		estado=true;
+		}else
+			throw new CuentaException("Dni no valido vuelve a introducirlo"); 
+			
+		}catch(CuentaException e) {
+			e.printStackTrace();
+			}
+		}
+}
 	/*
 	public CuentaBancaria(String iban, Persona titular) {
 		this.iban = iban;
@@ -70,7 +83,10 @@ public class CuentaBancaria {
 		System.out.println("###############################");
 	}
 	
-	public static void mostrarMovimientos(String iban) {
+	public static void mostrarMovimientos(String iban)throws CuentaException{
+	boolean estado = false;
+		while(!estado) {
+		try {	
 	for(CuentaBancaria cbb:cb) {	
 		if(cbb.getIban().equalsIgnoreCase(iban)) {
 		System.out.println("***************************");
@@ -80,45 +96,84 @@ public class CuentaBancaria {
 			System.out.println("********************");
 				System.out.println("Fecha:"+mov.getFechaIngreso()+"\nCantidad:"+mov.getCantidad()+"\nConcepto:"+mov.getConcepto());
 				System.out.println("********************");
+		estado = true;
 		}
-		}
+		}else
+			throw new CuentaException("Iban no encontrado");
 	}
+	}catch(CuentaException e) {
+		e.printStackTrace();
+	}
+		}
 	}
 
-	public static void mostrarCuentaBancaria(String iban) {
+	public static void mostrarCuentaBancaria(String iban)throws CuentaException {
+		boolean estado = false;
+		while(!estado) {
+		try {	
 		for(CuentaBancaria cbb:cb) {
 			if(cbb.getIban().equalsIgnoreCase(iban)) {
 				cbb.mostrarInfo();
-			}
-				
+			estado=true;
+			}else 
+				throw new CuentaException("Iban no encontrado");
+		}
+		}catch(CuentaException e) {
+			e.printStackTrace();
 		}
 	}
-	public static void mostrarIban(String iban) {
+	}
+	public static void mostrarIban(String iban)throws CuentaException {
+		boolean estado = false;
+		while(!estado) {
+		try {	
 		for(CuentaBancaria cbb:cb) {
 			if(cbb.getIban().equalsIgnoreCase(iban)) {
 				cbb.mostrarIban();
-			}
-				
+			estado=true;
+			}else 
+				throw new CuentaException("Iban no encontrado");
+		}
+		}catch(CuentaException e) {
+			e.printStackTrace();
 		}
 	}
-	public static void mostrarTitular(String iban) {
+	}
+	public static void mostrarTitular(String iban)throws CuentaException {
+		boolean estado = false;
+		while(!estado) {
+		try {	
 		for(CuentaBancaria cbb:cb) {
 			if(cbb.getIban().equalsIgnoreCase(iban)) {
 				cbb.mostrarTitular();
-			}
-				
+			estado=true;
+			}else 
+				throw new CuentaException("Iban no encontrado");
+		}
+		}catch(CuentaException e) {
+			e.printStackTrace();
 		}
 	}
-	public static void mostrarSaldo(String iban) {
+}
+	public static void mostrarSaldo(String iban)throws CuentaException {
+		boolean estado = false;
+		while(!estado) {
+		try {	
 		for(CuentaBancaria cbb:cb) {
 			if(cbb.getIban().equalsIgnoreCase(iban)) {
 				cbb.mostrarSaldo();
-			}
-				
+			estado=true;
+			}else 
+				throw new CuentaException("Iban no encontrado");
 		}
-	}public static void ingresarDef()throws AvisarHacienda,Cuentaexception {
+		}catch(CuentaException e) {
+			e.printStackTrace();
+		}
+	}
+	}
+	public static void ingresarDef()throws Avisarhacienda,CuentaException {
 		boolean estado = false;
-		while(estado) {
+		while(!estado) {
 		try {
 			System.out.println("INTRODUCE IBAN:");
 		String iban1=teclado.next();
@@ -129,41 +184,38 @@ public class CuentaBancaria {
 	String conc=teclado.nextLine();
 	for(CuentaBancaria cbb:cb) {
 	if(cbb.getIban().equalsIgnoreCase(iban1)) {	
-<<<<<<< HEAD
+
 		cbb.mv.add(new Movimientos(iban1,getFechaActual(),cant,conc));
-		for(Movimientos m:cbb.mv) {
-	if (m.getCantidad()<=0) {
-		System.out.println("ERROR, NO SE PUEDE INGRESAR UNA CANTIDAD INFERIOR A 1");
-		
-=======
 	if (cant<=0) {
-		throw new Cuentaexception("No se puede ingresar una cantidad negativa:"+cant);
->>>>>>> 9d72020096bf65bdeaf89e32af2ba13cdba1a747
-	} 
+		throw new CuentaException("No se puede ingresar una cantidad negativa:"+cant);
+
+} 
 	if (cant > 3000) {
-	throw new AvisarHacienda(iban1,cbb.getTitular());
+	throw new Avisarhacienda(iban1,cbb.getTitular());
 	}
-<<<<<<< HEAD
-	cbb.saldo = cbb.saldo + m.getCantidad();
-=======
+
+
 	cbb.saldo = cbb.saldo + cant;
 	cbb.mv.add(new Movimientos(iban1,getFechaActual(),cant,conc));
->>>>>>> 9d72020096bf65bdeaf89e32af2ba13cdba1a747
 	System.out.println("Ingreso hecho");
 	estado = true;
+	}else 
+		throw new CuentaException("Iban no encontrado");
 	}
-	}
-	}catch(Cuentaexception e){
+	}catch(CuentaException e){
 		e.printStackTrace();
-	}catch(AvisarHacienda e) {
+	}catch(Avisarhacienda e) {
 		System.out.println("Debes avisar a hacienda");
+		e.printStackTrace();
+	}catch(InputMismatchException e) {
+		System.out.println("Tipo de dato no valido");
 		e.printStackTrace();
 	}
 		}
 	}
-	public static void retirarDef()throws Cuentaexception {
+	public static void retirarDef()throws CuentaException {
 	boolean estado = false;
-		while (estado) {
+		while (!estado) {
 		try {
 			System.out.println("INTRODUCE IBAN:");
 		String iban=teclado.next();
@@ -174,48 +226,38 @@ public class CuentaBancaria {
 		String conc=teclado.nextLine();
 		for(CuentaBancaria cbb:cb) {
 			if(cbb.getIban().equalsIgnoreCase(iban)) {	
-<<<<<<< HEAD
+
 				cbb.mv.add(new Movimientos(iban,getFechaActual(),cant,conc));
-				
-			for(Movimientos m:cbb.mv) {
-		if (m.getCantidad() <=0) {
-			System.out.println("ERROR, NO SE PUEDE RETIRAR UNA CANTIDAD INFERIOR A 1");
-			
-		}if (cbb.getSaldo() - m.getCantidad() < -50) {
-			System.out.println("NO PUEDES DEJAR LA CUENTA PELADA");
-			
-		}
-		
-=======
 		if (cant <=0) {
-			throw new Cuentaexception("No se puede retirar una cantidad negativa:"+cant);
+			throw new CuentaException("No se puede retirar una cantidad negativa:"+cant);
 		}if (cbb.getSaldo() -cant < -50) {
-			throw new Cuentaexception("No se puede dejar la cuenta en negativo");			
+			throw new CuentaException("No se puede dejar la cuenta en negativo");			
 		}
 		cbb.saldo = cbb.saldo + (-cant);
 		cbb.mv.add(new Movimientos(iban,getFechaActual(),-cant,conc));
 		System.out.println("Retiro hecho");
->>>>>>> 9d72020096bf65bdeaf89e32af2ba13cdba1a747
 		if (cbb.saldo < 0) {
-			throw new Cuentaexception("No se puede dejar la cuenta en negativo+");
+			throw new CuentaException("No se puede dejar la cuenta en negativo+");
 		}
-<<<<<<< HEAD
-		cbb.saldo = cbb.saldo - m.getCantidad();
-=======
 		estado = true;
->>>>>>> 9d72020096bf65bdeaf89e32af2ba13cdba1a747
-			}
-			}
-		}catch(Cuentaexception e) {
+
+			} else 
+				throw new CuentaException("Iban no encontrado");
+		}
+		}catch(CuentaException e) {
+			e.printStackTrace();
+		}catch(InputMismatchException e) {
+			System.out.println("Tipo de dato no valido");
 			e.printStackTrace();
 		}
 		}
 	}
 
-	public static void añadirCuenta() {
+	public static void añadirCuenta() throws CuentaException {
 		System.out.println("Dime un iban");
 		String iban2=teclado.next();
 		System.out.println("Ahora dime una persona");
+		System.out.println();
 		cb.add(new CuentaBancaria(iban2));
 		
 	}

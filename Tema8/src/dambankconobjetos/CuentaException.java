@@ -1,8 +1,8 @@
 package dambankconobjetos;
 
-public class Cuentaexception extends Exception{
+public class CuentaException extends Exception{
 	private String mensaje;
-	public Cuentaexception(String mensaje){
+	public CuentaException(String mensaje){
 		this.mensaje=mensaje;
 	}
 	@Override
@@ -11,5 +11,4 @@ public class Cuentaexception extends Exception{
 	}
 	
 	
-
 }

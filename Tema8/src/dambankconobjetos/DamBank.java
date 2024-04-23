@@ -5,11 +5,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DamBank {
 
-	public static void main(String[] args) throws AvisarHacienda, Cuentaexception {
+	public static void main(String[] args) throws Avisarhacienda, CuentaException {
 		// TODO Auto-generated method stub
 	
 		
@@ -23,11 +24,12 @@ public class DamBank {
 		//Movimientos m1 = new Movimientos("ES12345",getFechaActual(),100.0f,"Cena");
 		//Movimientos m2 = new Movimientos("ES12345",getFechaActual(),-20.0f,"Comida");
 
-
+		boolean estado=false;
 		String iban;
 		String conc;
 		Float cant;
-		
+		while(!estado) {
+		try {
 		while (opcion != 8) {
 			pintaMenu();
 			System.out.println("INTRODUCE UNA OPCIÓN: ");
@@ -68,6 +70,7 @@ public class DamBank {
 			case 8: 
 				System.out.println("GRACIAS POR USAR ESTA APLICACIÓN");
 				System.out.println("TODOS LOS DATOS SE PERDERÁN");
+				estado=true;
 				break;
 			case 9:
 				CuentaBancaria.añadirCuenta();
@@ -77,10 +80,13 @@ public class DamBank {
 				System.out.println("NO HAS ELEGIDO UNA OPCIÓN CORRECTA");
 				System.out.println("¡ELIGE BIEN!");
 			}
-			
-			
-			
 		}
+			
+		}catch(InputMismatchException e) {
+			System.out.println("Tipo de dato incorrecto");
+			e.printStackTrace();
+		}
+	}
 }
 
 
