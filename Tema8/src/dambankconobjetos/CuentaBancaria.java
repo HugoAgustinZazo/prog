@@ -11,7 +11,7 @@ public class CuentaBancaria {
 	String iban; 
 	Persona titular;
 	float saldo;
-	static ArrayList <Movimientos> mv = new ArrayList();
+ ArrayList <Movimientos> mv = new ArrayList();
 
 	
 	
@@ -70,30 +70,6 @@ public class CuentaBancaria {
 		System.out.println("###############################");
 	}
 	
-	public static void ingresar(String iban,Movimientos m) {
-		for(CuentaBancaria cbb:cb) {
-		if(cbb.getIban().equalsIgnoreCase(iban)) {
-			cbb.saldo = cbb.saldo + m.getCantidad();
-			System.out.println("Ingreso hecho");
-			}
-		}
-	}
-	
-
-	public static void retirar(String iban, Movimientos m) {
-		for(CuentaBancaria cbb:cb) {
-			if(cbb.getIban().equalsIgnoreCase(iban)) {
-				cbb.saldo = cbb.saldo - m.getCantidad();
-				System.out.println("Ingreso hecho");
-				}
-			}	
-	}
-		
-		
-	
-	
-	
-	
 	public static void mostrarMovimientos(String iban) {
 	for(CuentaBancaria cbb:cb) {	
 		if(cbb.getIban().equalsIgnoreCase(iban)) {
@@ -101,16 +77,14 @@ public class CuentaBancaria {
 		System.out.println("LISTADO DE MOVIMIENTOS");
 		System.out.println("***************************");
 		for(Movimientos mov:cbb.mv) {
-			mov.toString();
+			System.out.println("********************");
+				System.out.println("Fecha:"+mov.getFechaIngreso()+"\nCantidad:"+mov.getCantidad()+"\nConcepto:"+mov.getConcepto());
+				System.out.println("********************");
 		}
 		}
 	}
 	}
-	public static void movimientos() {
-		for(Movimientos mov:mv) {
-			mov.toString();
-		}
-	}
+
 	public static void mostrarCuentaBancaria(String iban) {
 		for(CuentaBancaria cbb:cb) {
 			if(cbb.getIban().equalsIgnoreCase(iban)) {
@@ -142,8 +116,11 @@ public class CuentaBancaria {
 			}
 				
 		}
-	}public static void ingresarDef() {
-		System.out.println("INTRODUCE IBAN:");
+	}public static void ingresarDef()throws AvisarHacienda,Cuentaexception {
+		boolean estado = false;
+		while(estado) {
+		try {
+			System.out.println("INTRODUCE IBAN:");
 		String iban1=teclado.next();
 		System.out.println("INTRODUCE CANTIDAD:");
 		float cant=teclado.nextFloat();
@@ -152,24 +129,43 @@ public class CuentaBancaria {
 	String conc=teclado.nextLine();
 	for(CuentaBancaria cbb:cb) {
 	if(cbb.getIban().equalsIgnoreCase(iban1)) {	
+<<<<<<< HEAD
 		cbb.mv.add(new Movimientos(iban1,getFechaActual(),cant,conc));
 		for(Movimientos m:cbb.mv) {
 	if (m.getCantidad()<=0) {
 		System.out.println("ERROR, NO SE PUEDE INGRESAR UNA CANTIDAD INFERIOR A 1");
 		
+=======
+	if (cant<=0) {
+		throw new Cuentaexception("No se puede ingresar una cantidad negativa:"+cant);
+>>>>>>> 9d72020096bf65bdeaf89e32af2ba13cdba1a747
 	} 
-	if (m.getCantidad() > 3000) {
-		System.out.println("¡¡¡AVISA A HACIENDA!!!");
+	if (cant > 3000) {
+	throw new AvisarHacienda(iban1,cbb.getTitular());
 	}
+<<<<<<< HEAD
 	cbb.saldo = cbb.saldo + m.getCantidad();
+=======
+	cbb.saldo = cbb.saldo + cant;
+	cbb.mv.add(new Movimientos(iban1,getFechaActual(),cant,conc));
+>>>>>>> 9d72020096bf65bdeaf89e32af2ba13cdba1a747
 	System.out.println("Ingreso hecho");
-	
+	estado = true;
 	}
 	}
+	}catch(Cuentaexception e){
+		e.printStackTrace();
+	}catch(AvisarHacienda e) {
+		System.out.println("Debes avisar a hacienda");
+		e.printStackTrace();
 	}
+		}
 	}
-	public static void retirarDef() {
-		System.out.println("INTRODUCE IBAN:");
+	public static void retirarDef()throws Cuentaexception {
+	boolean estado = false;
+		while (estado) {
+		try {
+			System.out.println("INTRODUCE IBAN:");
 		String iban=teclado.next();
 		System.out.println("INTRODUCE CANTIDAD:");
 		float cant=teclado.nextFloat();
@@ -178,6 +174,7 @@ public class CuentaBancaria {
 		String conc=teclado.nextLine();
 		for(CuentaBancaria cbb:cb) {
 			if(cbb.getIban().equalsIgnoreCase(iban)) {	
+<<<<<<< HEAD
 				cbb.mv.add(new Movimientos(iban,getFechaActual(),cant,conc));
 				
 			for(Movimientos m:cbb.mv) {
@@ -189,14 +186,32 @@ public class CuentaBancaria {
 			
 		}
 		
+=======
+		if (cant <=0) {
+			throw new Cuentaexception("No se puede retirar una cantidad negativa:"+cant);
+		}if (cbb.getSaldo() -cant < -50) {
+			throw new Cuentaexception("No se puede dejar la cuenta en negativo");			
+		}
+		cbb.saldo = cbb.saldo + (-cant);
+		cbb.mv.add(new Movimientos(iban,getFechaActual(),-cant,conc));
+		System.out.println("Retiro hecho");
+>>>>>>> 9d72020096bf65bdeaf89e32af2ba13cdba1a747
 		if (cbb.saldo < 0) {
-			System.out.println("HAS DEJANDO LA CUENTA EN NEGATIVO");
+			throw new Cuentaexception("No se puede dejar la cuenta en negativo+");
 		}
+<<<<<<< HEAD
 		cbb.saldo = cbb.saldo - m.getCantidad();
+=======
+		estado = true;
+>>>>>>> 9d72020096bf65bdeaf89e32af2ba13cdba1a747
 			}
 			}
+		}catch(Cuentaexception e) {
+			e.printStackTrace();
 		}
-			}
+		}
+	}
+
 	public static void añadirCuenta() {
 		System.out.println("Dime un iban");
 		String iban2=teclado.next();
