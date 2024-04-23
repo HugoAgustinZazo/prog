@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Ficheros.Cancionnn;
+
 public class MainGato2 {
 
 	public static void main(String[] args)throws ExcepcionNombre,ExcepcionEdad {
 		// TODO Auto-generated method stub
-		 ArrayList <Gato> gatoss= new ArrayList();
+		ArrayList <Gato> gatoss= new ArrayList();
 		 Scanner teclado= new Scanner(System.in);
 		
 		int gatosvalidos=0;
@@ -42,6 +44,7 @@ public class MainGato2 {
 		for(Gato g:gatoss) {
 			g.imprimir();
 		}
+
 	}
 	
 }
