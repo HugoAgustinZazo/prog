@@ -8,18 +8,11 @@ public class Persona {
      
 
 	public Persona(String dni, String nombre, String apellidos, String domicilio) {
-		if (validarDNI(dni)) {
 			this.dni = dni;
 			this.nombre = nombre;
 			this.apellidos = apellidos;
 			this.domicilio = domicilio;
-		} else {
-			System.out.println("ERROR EN EL FORMATO DEL DNI");
-			this.dni="00000000A";
-			this.nombre = "XYZ";
-			this.apellidos = "XYZ";
-			this.domicilio = "XYZ";
-		}
+	
 	}
 
 	private String getNombre() {
