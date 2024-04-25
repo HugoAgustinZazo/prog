@@ -2,10 +2,9 @@ package Proyectoprog;
 
 public class Mainproyecto {
 
-	public static void main(String[] args) throws JugadoresException {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-GestionJugadores.añadirJugadores();
-GestionJugadores.mostrarArray();
+
 	}
 	public static void menu() {
 		System.out.println("********MENU********");

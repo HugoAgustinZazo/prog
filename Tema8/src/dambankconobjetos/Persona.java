@@ -7,14 +7,14 @@ public class Persona {
     private String domicilio;
      
 
-	public Persona(String dni, String nombre, String apellidos, String domicilio) {
+	public Persona(String dni, String nombre, String apellidos, String domicilio){
+			
+			
 			this.dni = dni;
 			this.nombre = nombre;
 			this.apellidos = apellidos;
-			this.domicilio = domicilio;
-	
-	}
-
+			this.domicilio = domicilio; 
+}				
 	private String getNombre() {
         return nombre;
     }

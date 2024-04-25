@@ -43,14 +43,6 @@ public class CuentaBancaria {
 			}
 		}
 }
-	/*
-	public CuentaBancaria(String iban, Persona titular) {
-		this.iban = iban;
-		this.titular = titular;
-		this.saldo = 0;
-		this.movimientos = new Movimientos[maxMovimientos];
-	}
-	*/
 	static ArrayList <CuentaBancaria> cb = new ArrayList();
 	
 	public void mostrarInfotext() {

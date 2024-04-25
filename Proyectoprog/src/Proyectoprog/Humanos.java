@@ -1,19 +1,27 @@
 package Proyectoprog;
 
-public class Humanos{
+public class Humanos extends Jugadores{
+	static int puntos;
 	private final String nombre;
-	int puntos;
 	public Humanos(String nombre) {
-		this.nombre=nombre;
-		this.puntos=0;
-		
+		super(puntos);
+		this.nombre = nombre;
+
 	}
-	public int getPuntos() {
+
+	@Override
+	public void mostrarInformacion() {
+		System.out.println(this.nombre+" "+this.puntos);
+	}
+
+	public static int getPuntos() {
 		return puntos;
 	}
-	public void setPuntos(int puntos) {
-		this.puntos = puntos;
+
+	public static void setPuntos(int puntos) {
+		Humanos.puntos = puntos;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
