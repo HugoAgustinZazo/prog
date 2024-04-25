@@ -4,9 +4,18 @@ public class Mainproyecto {
 
 	public static void main(String[] args) throws JugadoresException {
 		// TODO Auto-generated method stub
-GestionJugadores.añadirJugadores();
+
+/*GestionJugadores.añadirJugadores();
+GestionHistorico.escribirRanking();
+
 GestionJugadores.mostrarArray();
+*/
+GestionJugadores.añadirJugadoresSistema();
+GestionRanking.escribirRanking();
+GestionJugadores.añadirJugadoresSistema();
+
 	}
+	
 	public static void menu() {
 		System.out.println("********MENU********");
 		System.out.println("1- Jugar partida");

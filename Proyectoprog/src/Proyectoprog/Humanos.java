@@ -3,7 +3,7 @@ package Proyectoprog;
 public class Humanos extends Jugadores{
 	static int puntos;
 	private final String nombre;
-	public Humanos(String nombre) {
+	public Humanos(String nombre, int puntos) {
 		super(puntos);
 		this.nombre = nombre;
 
@@ -24,6 +24,11 @@ public class Humanos extends Jugadores{
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	@Override
+	public String toString() {
+		return this.nombre+" "+this.puntos;
 	}
 
 }

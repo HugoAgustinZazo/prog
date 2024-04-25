@@ -14,5 +14,8 @@ public class Cpu extends Jugadores{
 		System.out.println(this.nombre+" "+this.puntos);
 		
 	}
+	public String toString() {
+		return this.nombre+" "+this.puntos;
+	}
 
 }

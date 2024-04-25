@@ -8,4 +8,14 @@ public Jugadores(int puntos) {
 	this.puntos = 0;
 }
 public abstract void mostrarInformacion();
+
+public String toStringg() {
+	String jugadores="";
+	for(Jugadores jg:GestionJugadores.jug) {
+		 jugadores = jg+" ";
+	}
+	return jugadores;
+	
+	}
+
 }

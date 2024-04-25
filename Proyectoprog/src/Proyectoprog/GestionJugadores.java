@@ -30,7 +30,7 @@ public class GestionJugadores {
 				}
 			}
 		}
-		jug.add(new Humanos(nombre));
+		jug.add(new Humanos(nombre,0));
 		jugadores ++;
 		System.out.println();
 			}
@@ -56,6 +56,7 @@ public class GestionJugadores {
 		boolean añadir = false;
 		while (añadir==false) {
 		try{
+		GestionRanking.leerPersonasDesdeArchivo("src/Ficheros/Ranking.txt");
 		System.out.println("Quieres añadir un jugador al sistema");
 		String respuesta = teclado.next();
 		if(respuesta.equalsIgnoreCase("si")) {
@@ -66,7 +67,7 @@ public class GestionJugadores {
 				throw new JugadoresException(nombre);
 				}
 			}
-		jugsis.add(new Humanos(nombre));
+		jugsis.add(new Humanos(nombre,0));
 		}else {
 			añadir = true;
 		}
