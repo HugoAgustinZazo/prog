@@ -1,19 +1,61 @@
 package Proyectoprog;
 
+import java.io.IOException;
+import java.nio.file.FileSystemException;
+import java.util.Scanner;
+
 public class Mainproyecto {
 
-	public static void main(String[] args) throws JugadoresException {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws JugadoresException, FileSystemException, IOException {
+		// TODO Auto-generated method stub	
+		Scanner teclado = new Scanner(System.in);
+		boolean salir = false;
+		while(!salir) {
+			menu();
+			int opcion = teclado.nextInt();
+			switch(opcion) {
+			case 1:
+				break;
+			case 2:
+				GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
+				for (Humanos hu: GestionJugadores.jugsis) {
+					System.out.println(hu);
+				}
+				break;
+			case 3:
+				GestionHistorico.leerHistorico();
+				break;
+			case 4:
+				GestionJugadores.subMenuJugadores();
+				break;
+			case 5:
+				salir = true;
+				break;
+			default:
+				System.out.println("Esa opción no existe");
+				break;
+			}
+		}
 
-/*GestionJugadores.añadirJugadores();
-GestionHistorico.escribirRanking();
+	GestionJugadores.añadirJugadoresSistema();
+	GestionRanking.escribirRanking();
+	GestionJugadores.jugsis.clear();
+	GestionJugadores.eliminarJugadores("paco");
+
+/*	Pasos a seguir para el Historico.	
+ * GestionJugadores.añadirJugadores();
+GestionHistorico.escribirHistoricio();
+GestionJugadores.jug.clear();
+--------------------------------------		
+GestionJugadores.añadirJugadores();
+GestionHistorico.escribirHistoricio();
+GestionHistorico.leerHistorico();
 
 GestionJugadores.mostrarArray();
-*/
 GestionJugadores.añadirJugadoresSistema();
 GestionRanking.escribirRanking();
 GestionJugadores.añadirJugadoresSistema();
-
+*/
 	}
 	
 	public static void menu() {

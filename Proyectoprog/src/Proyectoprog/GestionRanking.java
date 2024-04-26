@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GestionRanking {
 	
-	public static List<Humanos> leerPersonasDesdeArchivo(String nombreArchivo) {
+	public static List<Humanos> leerRanking(String nombreArchivo) {
 		 Path path = Paths.get(nombreArchivo);
 		 
 		 try {

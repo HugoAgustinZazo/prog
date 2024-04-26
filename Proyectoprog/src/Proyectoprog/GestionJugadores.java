@@ -1,5 +1,10 @@
 package Proyectoprog;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,9 +59,9 @@ public class GestionJugadores {
 	}
 	public static void añadirJugadoresSistema() throws JugadoresException{
 		boolean añadir = false;
+		GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
 		while (añadir==false) {
 		try{
-		GestionRanking.leerPersonasDesdeArchivo("src/Ficheros/Ranking.txt");
 		System.out.println("Quieres añadir un jugador al sistema");
 		String respuesta = teclado.next();
 		if(respuesta.equalsIgnoreCase("si")) {
@@ -75,7 +80,59 @@ public class GestionJugadores {
 			e.printStackTrace();
 		}
 	}
+		GestionRanking.escribirRanking();
 		System.out.println("Vuelva cuando necesite más jugadores :)");
+	}
+	public static void subMenuJugadores() throws JugadoresException {
+		boolean salir=false;
+		while(!salir){
+			menuJugadores();
+			int opcion = teclado.nextInt();
+			switch(opcion){
+				case 1:
+					GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
+					System.out.println("************Jugadores del sistema************");
+					for(Humanos hu:jugsis) {
+						System.out.println(hu);
+					}
+					break;
+				case 2:
+					añadirJugadoresSistema(); 
+					break;
+				case 3:
+					System.out.println("Dime el nombre del jugador que quieras eliminar o dar de baja del sistema");
+					String nombre = teclado.next();
+					eliminarJugadores(nombre);
+					break;
+				case 4:
+					salir=true;
+					break;
+				default:
+					System.out.println("Esa opcion no existe");
+					break;
+				
+			}
+			
+		}
+	}
+	public static void eliminarJugadores(String nombre) throws JugadoresException{
+		try {
+		Path path = Paths.get("src/Ficheros/Ranking.txt");
+		GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
+		for(Humanos hu:jugsis) {
+			if(hu.getNombre().equalsIgnoreCase(nombre)) {
+				jugsis.remove(hu);
+			}else
+				throw new JugadoresException("Ese jugador no esta en el sistema");
+		}
+			Files.delete(path);
+			Files.createFile(path);
+			GestionRanking.escribirRanking();
+		}catch(IOException e) {
+			System.err.println("");
+		}catch(JugadoresException e) {
+			System.err.println("");
+		}
 	}
 	public static void mostrarArray() {
 		for(Jugadores jg:jug) {
