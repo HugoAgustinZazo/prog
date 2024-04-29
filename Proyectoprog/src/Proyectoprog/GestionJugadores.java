@@ -20,21 +20,23 @@ public class GestionJugadores {
 		System.out.println("Cuantos jugadores van a jugar?");
 		int jugadoress = teclado.nextInt();
 		while(jugadores <jugadoress && añadir==false) {
-		try{
+		
 			System.out.println("¿Quiere añadir algun jugador?");
 			respuesta = teclado.next();
 			if(!respuesta.equalsIgnoreCase("si")) {
 				añadir = true;
-			}else {
+			}else 
+			try {	
 			System.out.println("Dime un nombre");
 			String nombre = teclado.next();
 			verificarJugadorPartida(nombre);
 			verificarSistema(nombre,jugadores);
-			añadirJugadoresSistema();
+			jugsis.add(new Humanos(nombre, 0));
+			System.out.println("Jugador añadido al sistema");	
 		jug.add(new Humanos(nombre,0));
 		jugadores ++;
 		System.out.println();
-			}
+			
 	}catch(JugadoresException e) {
 		e.printStackTrace();
 		}
@@ -47,9 +49,10 @@ public class GestionJugadores {
 			if(sis.getNombre().equalsIgnoreCase(nombre)) {
 				System.out.println("Este jugador esta registrado en el sistema por lo que si puede jugar");
 				jug.add(new Humanos(nombre,0));
+				System.out.println("Se ha añadido el jugador a la partida");
 				jugadores ++;
 			}else 
-				System.out.println("Ese jugador no esta registrado en el sistema, debe registrarlo primero");
+				System.out.println("Ese jugador no esta registrado en el sistema, por lo que sera registrado automaticamente");
 		}
 	}
 	public static void verificarJugadorPartida(String nombre) throws JugadoresException {

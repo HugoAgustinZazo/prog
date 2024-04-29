@@ -15,6 +15,7 @@ public class Mainproyecto {
 			int opcion = teclado.nextInt();
 			switch(opcion) {
 			case 1:
+				GestionarPartida.Partida();
 				break;
 			case 2:
 				GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
