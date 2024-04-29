@@ -28,13 +28,9 @@ public class GestionJugadores {
 			}else {
 			System.out.println("Dime un nombre");
 			String nombre = teclado.next();
-			for(Jugadores jg:jug) {
-			if(jg instanceof Humanos) {
-				if(((Humanos) jg).getNombre().equalsIgnoreCase(nombre)) {
-					throw new JugadoresException(nombre);
-				}
-			}
-		}
+			verificarJugadorPartida(nombre);
+			verificarSistema(nombre,jugadores);
+			añadirJugadoresSistema();
 		jug.add(new Humanos(nombre,0));
 		jugadores ++;
 		System.out.println();
@@ -44,8 +40,25 @@ public class GestionJugadores {
 		}
 	}
 		System.out.println("BUENA PARTIDA");
-		for(int i=0;i<jugadoress-jugadores;i++) {
-			jug.add(new Cpu("CPU"+(i+1)));
+		añadirCpu(jugadoress,jugadores);
+	}
+	public static void verificarSistema(String nombre, int jugadores) {
+		for(Humanos sis :jugsis) {
+			if(sis.getNombre().equalsIgnoreCase(nombre)) {
+				System.out.println("Este jugador esta registrado en el sistema por lo que si puede jugar");
+				jug.add(new Humanos(nombre,0));
+				jugadores ++;
+			}else 
+				System.out.println("Ese jugador no esta registrado en el sistema, debe registrarlo primero");
+		}
+	}
+	public static void verificarJugadorPartida(String nombre) throws JugadoresException {
+		for(Jugadores jg:jug) {
+			if(jg instanceof Humanos) {
+				if(((Humanos) jg).getNombre().equalsIgnoreCase(nombre)) {
+					throw new JugadoresException(nombre);
+				}
+			}
 		}
 	}
 	public static void menuJugadores() {
@@ -57,24 +70,31 @@ public class GestionJugadores {
 		System.out.println("************************");
 		
 	}
+	public static void añadirCpu(int jugadoress,int jugadores) {
+		for(int i=0;i<jugadoress-jugadores;i++) {
+			jug.add(new Cpu("CPU"+(i+1)));
+		}
+	}
 	public static void añadirJugadoresSistema() throws JugadoresException{
 		boolean añadir = false;
+		int contador=0;
 		GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
 		while (añadir==false) {
 		try{
-		System.out.println("Quieres añadir un jugador al sistema");
-		String respuesta = teclado.next();
-		if(respuesta.equalsIgnoreCase("si")) {
-		System.out.println("Dime un nombre");
-		String nombre = teclado.next();
+			System.out.println("Cuantos jugadores quieres añadir");
+			int jugadores=teclado.nextInt();
+			System.out.println("Dime su nombre");
+			String nombre = teclado.next(); {
 		for(Humanos hu:jugsis) {
 			if(hu.getNombre().equalsIgnoreCase(nombre)) {
 				throw new JugadoresException(nombre);
 				}
 			}
 		jugsis.add(new Humanos(nombre,0));
-		}else {
-			añadir = true;
+		contador++;
+		if(contador>=jugadores) {
+			añadir=true;
+		}
 		}
 		}catch(JugadoresException e) {
 			e.printStackTrace();
@@ -97,12 +117,14 @@ public class GestionJugadores {
 					}
 					break;
 				case 2:
+					System.out.println("Vas a añadir jugadores al sistema");
+					System.out.println();
 					añadirJugadoresSistema(); 
 					break;
 				case 3:
 					System.out.println("Dime el nombre del jugador que quieras eliminar o dar de baja del sistema");
-					String nombre = teclado.next();
-					eliminarJugadores(nombre);
+					String jugador = teclado.next();
+					eliminarJugadores(jugador);
 					break;
 				case 4:
 					salir=true;

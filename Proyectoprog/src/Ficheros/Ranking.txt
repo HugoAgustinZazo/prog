@@ -1,4 +1,1 @@
 hugo 0
-paco 0
-cesar 0
-manu 0
