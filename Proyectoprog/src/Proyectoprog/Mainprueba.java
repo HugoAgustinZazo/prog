@@ -9,6 +9,7 @@ public class Mainprueba {
 	// TODO Auto-generated method stub
 		//GestionarPartida.Partida();
 	System.out.println(PreguntasMates.generarCadena());
+	
 	//System.out.println(random.nextInt(9)+7);
 	
 	}

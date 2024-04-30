@@ -1,10 +1,8 @@
 package Proyectoprog;
 
 public class Cpu extends Jugadores{
-	static int puntos;
-	String nombre;
 	public Cpu( String nombre) {
-		super(puntos);
+		super(nombre);
 		this.nombre=nombre;
 
 	}
