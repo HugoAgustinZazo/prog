@@ -1,5 +1,5 @@
-package Proyectoprog;
-import net.objecthunter.exp4j.*;
+package Proyectoprog;/*
+import net.objecthunter.exp4j.*;*/
 import java.util.Random;
 
 public class PreguntasMates extends Preguntas{
