@@ -27,13 +27,12 @@ static String respuesta;
 	public static void leerPreguntaIngles() throws FileSystemException,IOException  {
 		String nombrearchivo="src/Ficheros/ingles.txt";
 		Path rutafichero=Paths.get(nombrearchivo);
-		ArrayList<String> ingles = new ArrayList();
-		
+		ArrayList<String> ingles = new ArrayList();		
 		long num=0;
 		try {
 		ingles = (ArrayList<String>)Files.readAllLines(rutafichero);
 		Random random = new Random();
-		 num = random.nextLong(0,1000);
+		 num = random.nextLong(0,ingles.size()/5);
 		 String pregunta1=ingles.get((int)num*5);
 		 enunciado=pregunta1; 
 		 for(int i=0;i<4;i++) {

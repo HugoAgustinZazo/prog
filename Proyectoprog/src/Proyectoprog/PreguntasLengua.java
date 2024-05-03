@@ -30,7 +30,7 @@ static String cadena;
 		try {
 		palabras = (ArrayList<String>)Files.readAllLines(rutafichero);
 		Random random = new Random();
-		 num = random.nextLong(0,85220);
+		 num = random.nextLong(0,palabras.size());
 		}catch (NoSuchFileException e) {
 			System.err.println("Ese fichero no existe");
 		}catch (FileSystemException e) {

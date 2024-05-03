@@ -15,7 +15,9 @@ public class Mainproyecto {
 			int opcion = teclado.nextInt();
 			switch(opcion) {
 			case 1:
+				GestionarPartida.rellenarArrayPreguntas();
 				GestionarPartida.Partida();
+				GestionarPartida.preg.clear();
 				break;
 			case 2:
 				GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
