@@ -10,9 +10,10 @@ public class Mainproyecto {
 		// TODO Auto-generated method stub	
 		Scanner teclado = new Scanner(System.in);
 		boolean salir = false;
+		int opcion=999;
 		while(!salir) {
 			menu();
-			int opcion = teclado.nextInt();
+			opcion = teclado.nextInt();
 			switch(opcion) {
 			case 1:
 				GestionarPartida.rellenarArrayPreguntas();
@@ -20,7 +21,7 @@ public class Mainproyecto {
 				GestionarPartida.preg.clear();
 				break;
 			case 2:
-				GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
+				GestionRanking.leerRanking(Constantes.rutaRanking);
 				for (Humanos hu: GestionJugadores.jugsis) {
 					System.out.println(hu);
 				}

@@ -19,7 +19,8 @@ public class GestionHistorico {
 			 humano = humano+hu.toString()+" ";
 			}List<String> linesToAdd = Arrays.asList(humano);
 			Files.write(Paths.get("src/Ficheros/Historico.txt"), linesToAdd, StandardOpenOption.APPEND);
-		 } catch (IOException e) {
+			GestionJugadores.jug.clear();	
+		} catch (IOException e) {
 		 System.err.println("Ocurrió un error al escribir en el archivo: " +
 		e.getMessage());
 		 }

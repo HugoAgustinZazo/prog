@@ -32,15 +32,13 @@ public class GestionRanking {
 				for(Humanos hu:GestionJugadores.jugsis) {
 				String humano = hu.toString();	
 				List<String> linesToAdd = Arrays.asList(humano);
-				Files.write(Paths.get("src/Ficheros/Ranking.txt"), linesToAdd, StandardOpenOption.APPEND);
+				Files.write(Paths.get(Constantes.rutaRanking), linesToAdd, StandardOpenOption.APPEND);
 			}
 			 } catch (IOException e) {
 			 System.err.println("Ocurrió un error al escribir en el archivo: " +
 			e.getMessage());
 			 }
-			 
+			 GestionJugadores.jugsis.clear();
 	}
-	public static void eliminarJugador() {
-		
-	}
+	
 }

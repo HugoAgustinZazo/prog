@@ -13,15 +13,19 @@ public class GestionJugadores {
 	static Scanner teclado = new Scanner(System.in);
 	static ArrayList <Humanos> jugsis = new ArrayList();
 	
-	public static void añadirJugadores() throws JugadoresException{
+	public static void añadirJugadores() throws JugadoresException, IOException{
+		Path path = Paths.get(Constantes.rutaRanking);
 		int jugadores =0;
 		String respuesta;
 		boolean añadir = false;
+		GestionRanking.leerRanking(Constantes.rutaRanking);
+		Files.delete(path);
+		Files.createFile(path);
 		System.out.println("Cuantos jugadores van a jugar?");
 		int jugadoress = teclado.nextInt();
 		while(jugadores <jugadoress && añadir==false) {
 		
-			System.out.println("¿Quiere añadir algun jugador?");
+			System.out.println("¿Quiere añadir algun jugador humano?");
 			respuesta = teclado.next();
 			if(!respuesta.equalsIgnoreCase("si")) {
 				añadir = true;
@@ -78,10 +82,13 @@ public class GestionJugadores {
 			jug.add(new Cpu("CPU"+(i+1)));
 		}
 	}
-	public static void añadirJugadoresSistema() throws JugadoresException{
+	public static void añadirJugadoresSistema() throws JugadoresException, IOException{
+		Path path = Paths.get(Constantes.rutaRanking);
 		boolean añadir = false;
 		int contador=0;
-		GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
+		GestionRanking.leerRanking(Constantes.rutaRanking);
+		Files.delete(path);
+		Files.createFile(path);
 		while (añadir==false) {
 		try{
 			System.out.println("Cuantos jugadores quieres añadir");
@@ -101,23 +108,25 @@ public class GestionJugadores {
 		}
 		}catch(JugadoresException e) {
 			e.printStackTrace();
-		}
+		
 	}
 		GestionRanking.escribirRanking();
 		System.out.println("Vuelva cuando necesite más jugadores :)");
 	}
-	public static void subMenuJugadores() throws JugadoresException {
+	}
+	public static void subMenuJugadores() throws JugadoresException, IOException {
 		boolean salir=false;
 		while(!salir){
 			menuJugadores();
 			int opcion = teclado.nextInt();
 			switch(opcion){
 				case 1:
-					GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
+					GestionRanking.leerRanking(Constantes.rutaRanking);
 					System.out.println("************Jugadores del sistema************");
 					for(Humanos hu:jugsis) {
 						System.out.println(hu);
 					}
+					jugsis.clear();
 					break;
 				case 2:
 					System.out.println("Vas a añadir jugadores al sistema");
@@ -142,8 +151,8 @@ public class GestionJugadores {
 	}
 	public static void eliminarJugadores(String nombre) throws JugadoresException{
 		try {
-		Path path = Paths.get("src/Ficheros/Ranking.txt");
-		GestionRanking.leerRanking("src/Ficheros/Ranking.txt");
+		Path path = Paths.get(Constantes.rutaRanking);
+		GestionRanking.leerRanking(Constantes.rutaRanking);
 		for(Humanos hu:jugsis) {
 			if(hu.getNombre().equalsIgnoreCase(nombre)) {
 				jugsis.remove(hu);
