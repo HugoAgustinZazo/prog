@@ -12,7 +12,7 @@ public class GestionRanking {
 	
 	public static List<Humanos> leerRanking(String nombreArchivo) {
 		 Path path = Paths.get(nombreArchivo);
-		 
+		 GestionJugadores.jugsis.clear();
 		 try {
 		 List<String> lineas = Files.readAllLines(path);
 		 for (String linea : lineas) {

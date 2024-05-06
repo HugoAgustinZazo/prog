@@ -1,5 +1,6 @@
 package Proyectoprog;
 import java.util.Random;
+import net.objecthunter.exp4j.*;
 public class PreguntasMates extends Preguntas{
 
 	public PreguntasMates(String enunciado) {
@@ -36,9 +37,11 @@ public class PreguntasMates extends Preguntas{
 		char[]operacion= {'*','-','+'};
 		return operacion[random.nextInt(3)+0];
 	}
-	public static double solucionCadena(String cadena) {
-		double solucion = 0;
-
+	public static int solucionCadena(String cadena) {
+		int solucion = 0;
+		Expression e;
+		e = new ExpressionBuilder(cadena).build();
+		solucion = (int) e.evaluate();
 		return solucion;
 	}
 }

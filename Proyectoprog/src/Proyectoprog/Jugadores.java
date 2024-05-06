@@ -3,10 +3,11 @@ package Proyectoprog;
 public abstract class Jugadores {
 int puntos;
 String nombre;
+
 public Jugadores(String nombre) {
 	super();
 	this.nombre=nombre;
-	this.puntos = 0;
+	this.puntos=0;
 }
 public abstract void mostrarInformacion();
 public int getPuntos() {
@@ -18,4 +19,5 @@ public void setPuntos(int puntos) {
 public String getNombre() {
 	return nombre;
 }
+
 }

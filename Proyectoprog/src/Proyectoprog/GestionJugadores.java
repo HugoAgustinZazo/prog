@@ -34,9 +34,11 @@ public class GestionJugadores {
 			System.out.println("Dime un nombre");
 			String nombre = teclado.next();
 			verificarJugadorPartida(nombre);
-			verificarSistema(nombre,jugadores);
-			jugsis.add(new Humanos(nombre, 0));
-			System.out.println("Jugador añadido al sistema");	
+			if(verificarSistema(nombre,jugadores)==false) {
+				jugsis.add(new Humanos(nombre,0));
+				System.out.println("El jugador no estaba registrado en el sistema por lo que se ha añadido automaticamente");
+			}
+			System.out.println("Jugador añadido a la partida");	
 		jug.add(new Humanos(nombre,0));
 		jugadores ++;
 		System.out.println();
@@ -48,16 +50,15 @@ public class GestionJugadores {
 		System.out.println("BUENA PARTIDA");
 		añadirCpu(jugadoress,jugadores);
 	}
-	public static void verificarSistema(String nombre, int jugadores) {
+	public static boolean verificarSistema(String nombre, int jugadores) {
+		boolean registrado = false;
 		for(Humanos sis :jugsis) {
 			if(sis.getNombre().equalsIgnoreCase(nombre)) {
-				System.out.println("Este jugador esta registrado en el sistema por lo que si puede jugar");
-				jug.add(new Humanos(nombre,0));
-				System.out.println("Se ha añadido el jugador a la partida");
 				jugadores ++;
-			}else 
-				System.out.println("Ese jugador no esta registrado en el sistema, por lo que sera registrado automaticamente");
+				registrado = true;
+			}
 		}
+		return registrado;
 	}
 	public static void verificarJugadorPartida(String nombre) throws JugadoresException {
 		for(Jugadores jg:jug) {

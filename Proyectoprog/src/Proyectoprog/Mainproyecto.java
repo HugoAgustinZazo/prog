@@ -40,26 +40,6 @@ public class Mainproyecto {
 				break;
 			}
 		}
-/*
-	GestionJugadores.añadirJugadoresSistema();
-	GestionRanking.escribirRanking();
-	GestionJugadores.jugsis.clear();
-	GestionJugadores.eliminarJugadores("paco");
-*/
-/*	Pasos a seguir para el Historico.	
- * GestionJugadores.añadirJugadores();
-GestionHistorico.escribirHistoricio();
-GestionJugadores.jug.clear();
---------------------------------------		
-GestionJugadores.añadirJugadores();
-GestionHistorico.escribirHistoricio();
-GestionHistorico.leerHistorico();
-
-GestionJugadores.mostrarArray();
-GestionJugadores.añadirJugadoresSistema();
-GestionRanking.escribirRanking();
-GestionJugadores.añadirJugadoresSistema();
-*/
 	}
 	
 	public static void menu() {

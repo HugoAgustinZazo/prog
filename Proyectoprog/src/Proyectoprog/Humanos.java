@@ -4,7 +4,7 @@ public class Humanos extends Jugadores{
 	public Humanos(String nombre, int puntos) {
 		super(nombre);
 		this.nombre = nombre;
-
+		this.puntos=puntos;
 	}
 
 	@Override
@@ -16,5 +16,6 @@ public class Humanos extends Jugadores{
 	public String toString() {
 		return this.nombre+" "+this.puntos;
 	}
+	
 
 }

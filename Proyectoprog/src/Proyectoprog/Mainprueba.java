@@ -29,11 +29,10 @@ public class Mainprueba {
 			System.out.println(Constantes.mensajeRespFallada+respuesta);
 		}
 		*/
-		String cadena = PreguntasMates.generarCadena();
-		
-		System.out.println(cadena);
-		System.out.println(PreguntasMates.solucionCadena(cadena));
-		
-		}
+		GestionarPartida.rellenarArrayPreguntas();
+		int num=random.nextInt(0,GestionarPartida.preg.size());
+		System.out.println(num);
+		System.out.println(GestionarPartida.preg.size());
+	}
 
 }

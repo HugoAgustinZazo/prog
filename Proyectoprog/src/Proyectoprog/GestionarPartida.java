@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -47,14 +46,14 @@ public class GestionarPartida {
 		}
 	}
 	public static void rellenarArrayPreguntas() {
-		//preg.add(new PreguntasMates(Constantes.enunciadoMates));
+		preg.add(new PreguntasMates(Constantes.enunciadoMates));
 		preg.add(new PreguntasIngles(Constantes.enunciadoIngles));
 		preg.add(new PreguntasLengua(Constantes.enunciadoLengua));
 		 
 	}
 	public static Preguntas preguntaAleatoria(){
 		Random random = new Random();
-		int num=random.nextInt(0,preg.size()-1);
+		int num=random.nextInt(0,preg.size());
 		return preg.get(num);
 		
 	}
@@ -71,21 +70,31 @@ public class GestionarPartida {
 	public static void estructuraRonda(int numpreguntas) throws FileSystemException, IOException, JugadoresException {
 		Path path = Paths.get(Constantes.rutaRanking);
 		System.out.println("Va a comenzar la partida, primero añade los jugadores a la partida");
+		GestionJugadores.jug.clear();
 		GestionJugadores.añadirJugadores();
 		int i=0;
 		int contador=0;
 		Collections.shuffle(GestionJugadores.jug);
 		while(contador<numpreguntas*GestionJugadores.jug.size()) {
 		for(Jugadores jg:GestionJugadores.jug) {
-		System.out.println("La pregunta número "+(i+1)+" es para "+jg.getNombre());
-		//preguntaMates(preguntaAleatoria(),jg);
-		preguntaLengua(preguntaAleatoria(),jg);
 		System.out.println();
-		preguntaIngles(preguntaAleatoria(),jg);
+		System.out.println("La pregunta número "+(i+1)+" es para "+jg.getNombre());
+		Preguntas preg = preguntaAleatoria();
+		preguntaMates(preg,jg);
+		preguntaLengua(preg,jg);
+		preguntaIngles(preg,jg);
 		contador++;
 		i++;
 		}
 		}
+	for(Jugadores jg:GestionJugadores.jug) {
+		System.out.println("*****************");
+		jg.mostrarInformacion();
+	}
+	for(Jugadores jg:GestionJugadores.jugsis) {
+		System.out.println("*****************");
+		jg.mostrarInformacion();
+	}
 	GestionHistorico.escribirHistoricio();
 	Files.delete(path);
 	Files.createFile(path);
@@ -96,14 +105,14 @@ public class GestionarPartida {
 	}
 	public static void preguntaMates(Preguntas pregunta, Jugadores jugador) {
 		if(pregunta instanceof PreguntasMates) {
+			System.out.println();
 			String cadena = PreguntasMates.generarCadena();
 			System.out.println(Constantes.enunciadoMates+"'"+cadena+"'");
-		    int respuesta = teclado.nextInt();
 			if(jugador instanceof Cpu) {
 		    	System.out.println(Constantes.mensajeRespAcertada);
 		    	jugador.setPuntos(jugador.puntos+1);
 		    }else if(jugador instanceof Humanos) {
-		    	
+		    	int respuesta = teclado.nextInt();
 		    	if(respuesta==PreguntasMates.solucionCadena(cadena)) {
 		    	System.out.println(Constantes.mensajeRespAcertada);
 		    	jugador.setPuntos(jugador.puntos+1);
@@ -116,9 +125,9 @@ public class GestionarPartida {
 	}
 	public static void preguntaLengua(Preguntas pregunta, Jugadores jugador) throws FileSystemException, IOException {
 		if(pregunta instanceof PreguntasLengua) {
+			System.out.println();
 			String cadena = PreguntasLengua.taparLetra();
 			System.out.println(Constantes.enunciadoLengua+"'"+cadena+"'");
-			System.out.println();
 			if(jugador instanceof Cpu) {
 		    	System.out.println(Constantes.mensajeRespFallada+PreguntasLengua.cadena);
 		    }else if(jugador instanceof Humanos) {
@@ -136,11 +145,10 @@ public class GestionarPartida {
 	public static void preguntaIngles(Preguntas pregunta, Jugadores jugador) throws FileSystemException, IOException {
 		Random rand = new Random();
 		if(pregunta instanceof PreguntasIngles) {
+			System.out.println();
 			System.out.println(Constantes.enunciadoIngles);
 			PreguntasIngles.leerPreguntaIngles();
-			System.out.println();
 			String respuesta = PreguntasIngles.respuesta;
-			teclado.nextLine();
 			if(jugador instanceof Cpu) {
 				int num = rand.nextInt(0,4);
 				System.out.println(Constantes.respuestaCPU+(num+1));
@@ -151,12 +159,13 @@ public class GestionarPartida {
 					System.out.println(Constantes.mensajeRespFallada+respuesta);
 				}
 				}else if(jugador instanceof Humanos) {
-				String solucion = teclado.nextLine();
-				if(solucion.equalsIgnoreCase(respuesta)) {
+				int solucion = teclado.nextInt();
+				if(PreguntasIngles.pregunta.get(solucion-1).equalsIgnoreCase(respuesta)) {
 		    	System.out.println(Constantes.mensajeRespAcertada);
+		    	System.out.println("La solución era"+respuesta);
 		    	jugador.setPuntos(jugador.puntos+1);
 		    	sumarPuntosSistema(jugador.getNombre());
-				}else if(!solucion.equalsIgnoreCase(respuesta)) {
+				}else if(!PreguntasIngles.pregunta.get(solucion-1).equalsIgnoreCase(respuesta)) {
 		    	System.out.println(Constantes.mensajeRespFallada+respuesta);
 		    }
 	}
