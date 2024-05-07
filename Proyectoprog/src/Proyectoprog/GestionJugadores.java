@@ -169,10 +169,4 @@ public class GestionJugadores {
 			System.err.println("");
 		}
 	}
-	public static void mostrarArray() {
-		for(Jugadores jg:jug) {
-			jg.mostrarInformacion();
-		}
-	}
-	
 }

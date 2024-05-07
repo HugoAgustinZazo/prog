@@ -41,7 +41,6 @@ public class Mainproyecto {
 			}
 		}
 	}
-	
 	public static void menu() {
 		System.out.println("********MENU********");
 		System.out.println("1- Jugar partida");

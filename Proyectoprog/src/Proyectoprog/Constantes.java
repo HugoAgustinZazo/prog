@@ -9,4 +9,5 @@ static final String respuestaCPU="La respuesta correcta es la número: ";
 static final String mensajeRespAcertada="Genial pregunta acertada";
 static final String mensajeRespFallada="OH!!! Respuesta incorrecta, la solucion era: ";
 static final String rutaRanking="src/Ficheros/Ranking.txt";
+static final String rutaHistorico="src/Ficheros/Historico.txt";
 }

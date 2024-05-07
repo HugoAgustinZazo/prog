@@ -91,17 +91,10 @@ public class GestionarPartida {
 		System.out.println("*****************");
 		jg.mostrarInformacion();
 	}
-	for(Jugadores jg:GestionJugadores.jugsis) {
-		System.out.println("*****************");
-		jg.mostrarInformacion();
-	}
 	GestionHistorico.escribirHistoricio();
 	Files.delete(path);
 	Files.createFile(path);
 	GestionRanking.escribirRanking();
-	
-	
-	
 	}
 	public static void preguntaMates(Preguntas pregunta, Jugadores jugador) {
 		if(pregunta instanceof PreguntasMates) {
@@ -162,7 +155,7 @@ public class GestionarPartida {
 				int solucion = teclado.nextInt();
 				if(PreguntasIngles.pregunta.get(solucion-1).equalsIgnoreCase(respuesta)) {
 		    	System.out.println(Constantes.mensajeRespAcertada);
-		    	System.out.println("La solución era"+respuesta);
+		    	System.out.println("La solución era: '"+respuesta+"'");
 		    	jugador.setPuntos(jugador.puntos+1);
 		    	sumarPuntosSistema(jugador.getNombre());
 				}else if(!PreguntasIngles.pregunta.get(solucion-1).equalsIgnoreCase(respuesta)) {

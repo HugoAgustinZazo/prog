@@ -18,7 +18,7 @@ public class GestionHistorico {
 			for(Jugadores hu:GestionJugadores.jug) {
 			 humano = humano+hu.toString()+" ";
 			}List<String> linesToAdd = Arrays.asList(humano);
-			Files.write(Paths.get("src/Ficheros/Historico.txt"), linesToAdd, StandardOpenOption.APPEND);
+			Files.write(Paths.get(Constantes.rutaHistorico), linesToAdd, StandardOpenOption.APPEND);
 			GestionJugadores.jug.clear();	
 		} catch (IOException e) {
 		 System.err.println("Ocurrió un error al escribir en el archivo: " +
@@ -28,7 +28,7 @@ public class GestionHistorico {
 }
 	
 	public static void leerHistorico() throws FileSystemException,IOException  {
-			String nombrearchivo="src/Ficheros/Historico.txt";
+			String nombrearchivo=Constantes.rutaHistorico;
 			Path rutafichero=Paths.get(nombrearchivo);
 			try {
 			ArrayList<String> lineas = (ArrayList<String>)Files.readAllLines(rutafichero);
