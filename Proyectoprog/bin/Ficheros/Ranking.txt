@@ -1,0 +1,2 @@
+hugo 2
+hugos 4

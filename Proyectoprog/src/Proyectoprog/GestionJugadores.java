@@ -15,15 +15,15 @@ public class GestionJugadores {
 	
 	public static void añadirJugadores() throws JugadoresException, IOException{
 		Path path = Paths.get(Constantes.rutaRanking);
-		int jugadores =0;
+		int jugadoreshumanos =0;
 		String respuesta;
 		boolean añadir = false;
 		GestionRanking.leerRanking(Constantes.rutaRanking);
 		Files.delete(path);
 		Files.createFile(path);
 		System.out.println("Cuantos jugadores van a jugar?");
-		int jugadoress = teclado.nextInt();
-		while(jugadores <jugadoress && añadir==false) {
+		int jugadorestotales = teclado.nextInt();
+		while(jugadoreshumanos <jugadorestotales && añadir==false) {
 		
 			System.out.println("¿Quiere añadir algun jugador humano?");
 			respuesta = teclado.next();
@@ -34,22 +34,27 @@ public class GestionJugadores {
 			System.out.println("Dime un nombre");
 			String nombre = teclado.next();
 			verificarJugadorPartida(nombre);
-			if(verificarSistema(nombre,jugadores)==false) {
+			if(verificarSistema(nombre,jugadoreshumanos)==false) {
 				jugsis.add(new Humanos(nombre,0));
+				GestionLog.escribirMensajesSencillos(GestionLog.jugsistema+nombre);
 				System.out.println("El jugador no estaba registrado en el sistema por lo que se ha añadido automaticamente");
 			}
 			System.out.println("Jugador añadido a la partida");	
 		jug.add(new Humanos(nombre,0));
-		jugadores ++;
+		GestionLog.escribirMensajesSencillos(GestionLog.jugadorañadido+nombre);
+		jugadoreshumanos ++;
 		System.out.println();
 			
 	}catch(JugadoresException e) {
 		e.printStackTrace();
-		}
+		GestionLog.escribirMensajesSencillos(GestionLog.error+e);	
+	}
 	}
 		System.out.println("BUENA PARTIDA");
-		añadirCpu(jugadoress,jugadores);
+		añadirCpu(jugadorestotales,jugadoreshumanos);
+		GestionLog.escribirLogInicioPartida(jugadoreshumanos,jugadorestotales-jugadoreshumanos);
 	}
+	
 	public static boolean verificarSistema(String nombre, int jugadores) {
 		boolean registrado = false;
 		for(Humanos sis :jugsis) {
@@ -102,6 +107,7 @@ public class GestionJugadores {
 				}
 			}
 		jugsis.add(new Humanos(nombre,0));
+		GestionLog.escribirMensajesSencillos(GestionLog.jugsistema+nombre);
 		contador++;
 		if(contador>=jugadores) {
 			añadir=true;
@@ -157,6 +163,7 @@ public class GestionJugadores {
 		for(Humanos hu:jugsis) {
 			if(hu.getNombre().equalsIgnoreCase(nombre)) {
 				jugsis.remove(hu);
+				GestionLog.escribirMensajesSencillos(GestionLog.jugadoreliminado+nombre);
 			}else
 				throw new JugadoresException("Ese jugador no esta en el sistema");
 		}

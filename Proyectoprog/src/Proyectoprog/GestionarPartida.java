@@ -87,13 +87,17 @@ public class GestionarPartida {
 		i++;
 		}
 		}
+	System.out.println("*****************");	
 	for(Jugadores jg:GestionJugadores.jug) {
-		System.out.println("*****************");
-		jg.mostrarInformacion();
+		System.out.print(jg+" ");
 	}
+	System.out.println("*****************\n");
+	GestionJugadores.jug.sort((h1, h2) -> Integer.compare(h2.getPuntos(), h1.getPuntos()));
+	GestionLog.escribirMensajesSencillos(GestionJugadores.jug.get(0).getNombre()+GestionLog.ganador);
 	GestionHistorico.escribirHistoricio();
 	Files.delete(path);
 	Files.createFile(path);
+	GestionJugadores.jugsis.sort((h1, h2) -> Integer.compare(h2.getPuntos(), h1.getPuntos()));
 	GestionRanking.escribirRanking();
 	}
 	public static void preguntaMates(Preguntas pregunta, Jugadores jugador) {

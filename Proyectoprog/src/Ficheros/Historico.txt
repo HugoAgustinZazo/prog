@@ -1,0 +1,6 @@
+hugo 1 hugos 1 
+hugo 0 hugos 2 
+hugo 1 hugos 1 
+hugo 2 hugod 1 
+hugos 0 
+hugos 1 

@@ -2,6 +2,7 @@ package Proyectoprog;
 
 import java.io.IOException;
 import java.nio.file.FileSystemException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Mainprueba {
@@ -29,10 +30,5 @@ public class Mainprueba {
 			System.out.println(Constantes.mensajeRespFallada+respuesta);
 		}
 		*/
-		GestionarPartida.rellenarArrayPreguntas();
-		int num=random.nextInt(0,GestionarPartida.preg.size());
-		System.out.println(num);
-		System.out.println(GestionarPartida.preg.size());
 	}
-
 }

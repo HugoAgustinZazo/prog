@@ -10,4 +10,5 @@ static final String mensajeRespAcertada="Genial pregunta acertada";
 static final String mensajeRespFallada="OH!!! Respuesta incorrecta, la solucion era: ";
 static final String rutaRanking="src/Ficheros/Ranking.txt";
 static final String rutaHistorico="src/Ficheros/Historico.txt";
+static final String rutaLog="src/Ficheros/log";
 }
