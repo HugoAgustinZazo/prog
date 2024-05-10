@@ -1,3 +1,0 @@
-hugos 5
-hugo 4
-hugod 1
